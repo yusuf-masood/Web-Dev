@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ToDo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      margin: 0 auto;
+      max-width: 500px;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #ccc;
+
+    }
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 0 5px 5px 0;
+      border: none;
+      background-color: #2E83F2;
+      color: white;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    li span {
+      margin-right: 10px;
+    }
+    li input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    li button {
+      margin-left: auto;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>ToDo List</h1>
+  <form id="todo-form">
+    <input type="text" id="todo-input" placeholder="Add a to-do">
+    <button type="submit">Add</button>
+  </form>
+  <ul id="todo-list"></ul>
+
+  <script>
+    const todoForm = document.getElementById("todo-form");
+    const todoInput = document.getElementById("todo-input");
+    const todoList = document.getElementById("todo-list");
+    todoForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const newTodo = todoInput.value;
+      if (newTodo.trim() !== "") {
+        const li = document.createElement("li");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        const span = document.createElement("span");
+        const button = document.createElement("button");
+        span.innerText = newTodo;
+        button.innerText = "Delete";
+        button.addEventListener("click", () => {
+          li.remove();
+        });
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        li.appendChild(button);
+        todoList.appendChild(li);
+        todoInput.value = "";
+      }
+    });
+  </script>
+</body>
+</html>
